@@ -38,9 +38,9 @@ class UI {
                 button.innerText = "Đã thêm vào giỏ hàng";
                 button.disabled = true;
 
-                this.setCartValues(cart)    
+                this.setCartValues(cart)
                 this.addCartItem(inCart)
-                
+
 
                 const pAmountArray = [...document.querySelectorAll('.item-amount')];
                 pAmountArray.forEach(pAmount => {
@@ -204,26 +204,25 @@ const ui = new UI();
 //! local storage
 class Storage {
     static saveProducts(products) {
-        localStorage.setItem("products", JSON.stringify(products));
+        localStorage.setItem("productListCapstone", JSON.stringify(products));
     }
     static getProduct(id) {
         // lấy dữ liệu tên 'products' dưới local lên và parse từ JSON sang array gán vào biến tên products (let products). 
-        let products = JSON.parse(localStorage.getItem('products'));
+        if (localStorage.getItem('productListCapstone') != undefined) {
+            let products = JSON.parse(localStorage.getItem('productListCapstone'));
+            return products.find(product => product.id === id);
+        }
+
         // duyệt mảng products lấy ra product có id trùng với id truyền vào từ tham số
-        return products.find(product => product.id === id);
     }
     static saveCart(cart) {
         localStorage.setItem("cartCapstone", JSON.stringify(cart));
     }
     static getCart() {
-        let cart = JSON.parse(localStorage.getItem('cartCapstone'));
-        // cart.forEach(item => this.addCartItem(item))
-        // cart.forEach(item => console.log(item))
-        // console.log(cart)
-        // cart.forEach(item => {
-        //     return item;
-        // })
-        return cart;
+        if (localStorage.getItem('cartCapstone')) {
+            let cart = JSON.parse(localStorage.getItem('cartCapstone'));
+            return cart;
+        } else { return [] }
     }
 }
 
@@ -236,12 +235,7 @@ spService.getProductList().then(function (result) {
     ui.displayProducts(result.data);
     Storage.saveProducts(result.data);
 
-    //    console.log(Storage.getCart())
-
     cart = Storage.getCart()
-    // console.log(cart)
-    // cart.forEach(item => this.addCartItem(item))
-
 
     ui.getBagButtons();
     ui.cartLogic();
