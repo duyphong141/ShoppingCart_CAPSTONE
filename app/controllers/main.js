@@ -207,7 +207,7 @@ class Storage {
         localStorage.setItem("productListCapstone", JSON.stringify(products));
     }
     static getProduct(id) {
-        // lấy dữ liệu tên 'products' dưới local lên và parse từ JSON sang array gán vào biến tên products (let products). 
+        // lấy dữ liệu tên 'productListCapstone' dưới local lên và parse từ JSON sang array gán vào biến tên products (let products). 
         if (localStorage.getItem('productListCapstone') != undefined) {
             let products = JSON.parse(localStorage.getItem('productListCapstone'));
             return products.find(product => product.id === id);
