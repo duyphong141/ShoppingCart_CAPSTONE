@@ -34,7 +34,7 @@ class UI {
             let id = button.dataset.id;
             let inCart = cart.find(item => item.id === id);
             if (inCart) {
-                // console.log(inCart) 
+
                 button.innerText = "Đã thêm vào giỏ hàng";
                 button.disabled = true;
 
@@ -46,7 +46,7 @@ class UI {
                 pAmountArray.forEach(pAmount => {
                     let idAmount = pAmount.dataset.id;
                     let inCart1 = cart.find(item => item.id === idAmount);
-                    // console.log(inCart1);
+     
                     if (inCart1) {
                         pAmount.innerText = inCart1.amount
                     }
@@ -61,7 +61,7 @@ class UI {
 
                 // add product to the cart
                 cart = [...cart, cartItem]
-                // console.log(cart)
+     
 
                 // set cart values
                 this.setCartValues(cart)
